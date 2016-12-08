@@ -1,0 +1,66 @@
+$color1:#107AA5;
+$color2:#ec616b;
+$color3:#f06447;
+$gray:#4c4c4c;
+.effect{transition:all 500ms ease-in-out 0s;}
+@font-face {
+    font-family: bebas;
+    src: url(../fonts/UTM_Bebas.ttf) format('truetype'), url(../UTM_Bebas.woff) format('woff')
+}
+@font-face {
+    font-family: icib;
+    src: url(../fonts/iCielDINPro-Bold.ttf) format('truetype'), url(../iCielDINPro-Bold.woff) format('woff')
+}
+@font-face {
+    font-family: icibi;
+    src: url(../fonts/iCielDINPro-BoldItalic.ttf) format('truetype'), url(../fonts/iCielDINPro-BoldItalic.woff) format('woff')
+}
+@font-face {
+    font-family: icii;
+    src: url(../fonts/iCielDINPro-Italic.ttf) format('truetype'), url(../fonts/iCielDINPro-Italic.woff) format('woff')
+}
+@font-face {
+    font-family: gotham;
+    src: url(../../fonts/VNF-Gotham.ttf) format('truetype'), url(../../fonts/VNF-Gotham.woff) format('woff')
+}
+@font-face {
+    font-family: gothamu;
+    src: url(../fonts/iCielGotham-Ultra.ttf) format('truetype'), url(../fonts/iCielGotham-Ultra.woff) format('woff')
+}
+@font-face{ font-family:icir; src:url(../fonts/iCielDINPro-Regular.ttf) format('truetype'),url(../fonts/iCielDINPro-Regular.woff) format('woff')}
+%fox{
+    font-family: oxy;
+}
+%foxb{
+    font-family: oxy_bold;
+}
+%hd-shadow{
+	box-shadow:0 4px 8px #ddd;
+}
+$r1366: "(max-width: 1366px)";
+$r1024: "(max-width: 1024px)";
+$r768: "(max-width: 768px)";
+$r480: "(max-width: 480px)";
+$r414: "(max-width:414px)";
+$r375: "(max-width:375px)";
+$r360: "(max-width:360px)";
+$r320: "(max-width:320px)";
+.aligncenter {
+    margin: 5px auto;
+    display: block;
+    max-width: 100%;
+}
+.pc{
+    display: block;
+    @media #{$r480} {
+        display: none;
+    }
+}
+.mb{
+    display: none;
+    @media #{$r480} {
+        display: block;
+    }
+}
+
+
