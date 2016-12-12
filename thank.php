@@ -22,7 +22,7 @@
     <section class="body-sign">
         <div class="center-sign">
             <div class="tkbn">
-                <a href="http://bammi.benhvienthammykangnam.vn/" class="">
+                <a href="http://sacombank.vnfiba.com/" class="">
                     <img src="thank/images/thanks.png" style="max-width:350px;">
                 </a>
             </div>
@@ -32,7 +32,7 @@
                     <p class="tkdes">Bạn đã đăng ký thành công, chúng tôi sẽ liên hệ với bạn trong thời gian sớm nhất.</p>
                     <div class="row">
                         <div class="col-sm-12 btn-end">
-                            <a href="http://bammi.benhvienthammykangnam.vn/" class="btn-lg-x">Trở về trang chủ</a>
+                            <a href="http://sacombank.vnfiba.com/" class="btn-lg-x">Trở về trang chủ</a>
                         </div>
                     </div>
                 </div>

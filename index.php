@@ -8,10 +8,21 @@ $count_down_sale = (31-$day);
 if($count_down_sale<=20){
 	$count_down_sale = 20;
 }
+//CASH_IN_HAND
+//BANK_TRANSFER
+
 
 if(isset($_POST['name'])) {
+			$luong = "CASH_IN_HAND";
+            if($_POST['luong'] == "yes"){
+				$luong = "BANK_TRANSFER";
+			}
 	$arr = array(
 		'properties' => array(
+			array(
+				'property' => 'luong',
+				'value' => $luong
+			),
 			array(
 				'property' => 'email',
 				'value' => $_POST['email']
@@ -31,6 +42,14 @@ if(isset($_POST['name'])) {
 			array(
 				'property' => 'region',
 				'value' => $_POST['region']
+			),
+			array(
+				'property' => 'cardtype',
+				'value' => $_POST['cardtype']
+			),
+			array(
+				'property' => 'caoch',
+				'value' => $_POST['caoch']
 			),
 			array(
 				'property' => 'aff_source',
@@ -60,6 +79,7 @@ if(isset($_POST['name'])) {
 	@curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
 	@curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 	$response = @curl_exec($ch);
+
 	$status_code = @curl_getinfo($ch, CURLINFO_HTTP_CODE);
 	$curl_errors = curl_error($ch);
 	@curl_close($ch);
@@ -72,355 +92,357 @@ if(isset($_POST['name'])) {
 }
 ?>
 
+
 <!DOCTYPE html>
-<html lang="en">
+<!--[if IE 7 ]><body class="ie ie7"><![endif]-->
+<!--[if IE 8 ]><body class="ie ie8"><![endif]-->
+<!--[if IE 9 ]><body class="ie ie9"><![endif]-->
+<html class='no-js' lang="en">
+
 <head>
-	<title>BỆNH VIỆN THẨM MỸ KANGNAM</title>
 	<meta charset="utf-8">
-	<link rel="SHORTCUT ICON" href="media/images/st.png" />
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link id="pagestyle" rel="stylesheet" type="text/css" href="" />
+	<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, maximum-scale=1.0">
+	<title>Saccombank</title>
+	<meta content="" name="keywords">
+	<meta content="" name="description">
+	<link href="https://fonts.googleapis.com/css?family=Roboto+Slab&amp;subset=vietnamese" rel="stylesheet">
+	<link type="image/x-icon" href="img/fav.png" rel="shortcut icon">
+	<link rel="stylesheet" href="css/bootstrap.css">
+	<link rel="stylesheet" href="css/font-awesome.css">
+	<link rel="stylesheet" href="style.css">
+
+
+
 </head>
-<script type="text/javascript">
-	function layoutHandler(){
-		var styleLink = document.getElementById("pagestyle");
-		if(window.innerWidth < 441){
-			styleLink.setAttribute("href", "media/css/mb/style_mb.css");
-		} else if(window.innerWidth > 1000){
-			styleLink.setAttribute("href", "media/css/pc/style.css");
-		} else {
-			styleLink.setAttribute("href", "media/css/pc/style.css");
-		}
-	}
-	window.onresize = layoutHandler;
-	layoutHandler();
-</script>
-<body id="landingPage" data-spy="scroll" data-target=".navbar" data-offset="60">
-<nav class="navbar navbar-default navbar-fixed-top header ">
+
+<body>
+<section id="header">
 	<div class="container">
-		<div class="navbar-header">
-			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-			</button>
-			<a class="navbar-brand" href="#landingPage"><img src="media/images/logomb.png" alt=""></a>
+		<div class="logo">
+			<img src="img/logo.png" alt="logo" />
 		</div>
-		<div class="collapse navbar-collapse" id="myNavbar">
-			<ul class="nav navbar-nav menu">
-				<li><a href="#home">Trang chủ</a></li>
-				<li><a href="#reason">Công nghệ</a></li>
-				<li><a href="#process">Quy trình</a></li>
-				<li><a href="#customer">Khách Hàng</a></li>
-				<li><a href="#sale">Khuyến Mãi</a></li>
-			</ul>
-			<ul class="nav navbar-nav navbar-right dktop">
-
-				<li><a class="btn" href="#register">Đăng ký </a></li>
-			</ul>
-		</div>
-	</div>
-</nav>
-<div class="page1" id="home">
-	<div class="fixwidth">
-		<div class="headline slide"></div>
-		<div class="right">
-			<div class="top">ƯU ĐÃI NGAY  HÔM NAY!</div>
-			<div class="countdown">
-				<span id="started"></span>
-			</div>
-			<div class="percent">
-				<span>-<?php echo $count_down_sale; ?>%</span>
-			</div>
-			<div class="text">
-				<i>Chương trình Count Down Sale với <b>ưu đãi thay đổi theo từng ngày</b>  cho dịch vụ Bấm Mí Dove Eyes. <span><b>Đăng ký ngay hôm nay</b> để được nhận ưu đãi lớn nhất.</i></span>
-			</div>
-		</div>
-
-		<a href="#register" class="btn reg slide btnkn1km">Đăng ký ngay <span class="icon-angle-double-right "></span></a>
-	</div>
-</div>
-<div class="page2" id="reason">
-	<div class="fixwidth">
-		<div class="row">
-			<div class="col-sm-6 left">
-				<div class="title"><span></span>CÔNG NGHỆ BẤM MÍ DOVE EYES<span></span></div>
-				<div class="content">
-					<ul>
-						<li>Xu hướng bấm mí được sao Hàn ưa chuộng </li>
-						<li>Áp dụng đối với tình trạng mắt 1 mí, mắt mí lót, mắt không rõ mí, mắt lệch mí</li>
-						<li>Không phẫu thuật, không xâm lấn, an toàn</li>
-						<li>Nếp mí rõ nét, kết quả 10 năm - lâu dài hẳn so với phương pháp bấm mí thông thường </li>
-					</ul>
-				</div>
-			</div>
-			<div class="col-sm-6 right">
-				<div class="title"><span></span>Video khách hàng<span></span></div>
-				<div class="row">
-					<div class="col-sm-6">
-						<div class="video">
-							<a href="https://www.youtube.com/watch?v=bYK1HZZyRHc&list=PLROTewhS4-MaGUlT3cCOLmkkYZxoZxOKV&index=1" class="fancybox-media clip"></a>
-						</div>
-					</div>
-					<div class="col-sm-6">
-						<p>Video khách hàng bấm mí <br/>
-							Dove Eyes</p>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-sm-6">
-						<div class="video">
-							<a href="https://www.youtube.com/watch?v=hs2Q0th38p0&list=PLROTewhS4-MaGUlT3cCOLmkkYZxoZxOKV&index=7" class="fancybox-media clip1"></a>
-						</div>
-					</div>
-					<div class="col-sm-6">
-						<p>Video khách hàng bấm mí <br/>
-							Dove Eyes</p>
-					</div>
-				</div>
-				<a href="#register" class="btn reg slide ">Đăng ký tư vấn <span class="icon-angle-double-right "></span></a>
-			</div>
-		</div>
-	</div>
-</div>
-<div class="page3" id="dif">
-	<div class="fixwidth">
-		<div class="row desk">
-			<div class="col-sm-5">
-				<div class="title1">
-					ĐIỀU GÌ LÀM NÊN SỰ KHÁC BIỆT?
-					<span class="icon-right-5"></span>
-				</div>
-			</div>
-			<div class="col-sm-7">
-				<div class="row">
-					<div class="col-sm-6">
-						<figure>
-							<img src="media/images/page3-1.jpg" class="slide">
-							<figcaption>
-								<span>Chuyên khoa thẩm mỹ mắt </span>
-								Với các Chuyên gia giỏi, tu nghiệp tại  Hàn Quốc. Cơ sở vật chất & phòng tiểu phẫu được vô trùng tiêu chuẩn Hàn Quốc
-							</figcaption>
-						</figure>
-					</div>
-					<div class="col-sm-6">
-						<figure>
-							<img src="media/images/page3-2.jpg" class="slide">
-							<figcaption>
-								<span>Đo vẽ thẩm mỹ </span>
-								Chuẩn xác tạo 2 mí đều đẹp chuẩn  tỉ lệ vàng
-							</figcaption>
-						</figure>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-sm-6">
-						<figure>
-							<img src="media/images/page3-3.jpg" class="slide">
-							<figcaption>
-								<span>Kỹ thuật</span>
-								Không phẫu thuật, không cắt rạch (đính sụn mi với da mi mắt tạo liên kết chắc chắn)
-							</figcaption>
-						</figure>
-					</div>
-					<div class="col-sm-6">
-						<figure>
-							<img src="media/images/page3-4.jpg" class="slide">
-							<figcaption>
-								<span> Công nghệ Hàn Quốc</span>
-								Sử dụng chỉ đôi xoắn chéo rất mảnh, có đặc tính bền bỉ, độ đàn hồi cao
-							</figcaption>
-						</figure>
-					</div>
-				</div>
-
-			</div>
-		</div>
-		<div class="title1 mb">
-			ĐIỀU GÌ LÀM NÊN SỰ KHÁC BIỆT?
-		</div>
-		<div class="carousel slide mb" id="slide" data-ride="carousel">
-			<ol class="carousel-indicators">
-				<li data-target="#slide" data-slide-to="0" class="active"></li>
-				<li data-target="#slide" data-slide-to="1" class=""></li>
-				<li data-target="#slide" data-slide-to="2" class=""></li>
-				<li data-target="#slide" data-slide-to="3" class=""></li>
-			</ol>
-			<div class="carousel-inner" role="listbox">
-				<div class="item active">
-					<figure>
-						<img src="media/images/page3-1.jpg">
-						<figcaption>
-							<span>Chuyên khoa thẩm mỹ mắt </span>
-							Với các Chuyên gia giỏi, tu nghiệp tại Hàn Quốc. Cơ sở vật chất & phòng tiểu phẫu được vô trùng tiêu chuẩn Hàn Quốc
-						</figcaption>
-					</figure>
-				</div>
-				<div class="item ">
-					<figure>
-						<img src="media/images/page3-2.jpg">
-						<figcaption>
-							<span>Đo vẽ thẩm mỹ </span>
-							Chuẩn xác tạo 2 mí đều đẹp chuẩn  tỉ lệ vàng
-						</figcaption>
-					</figure>
-				</div>
-				<div class="item ">
-					<figure>
-						<img src="media/images/page3-3.jpg">
-						<figcaption>
-							<span>Kỹ thuật</span>
-							Không phẫu thuật, không cắt rạch (đính sụn mi với da mi mắt tạo liên kết chắc chắn)
-						</figcaption>
-					</figure>
-				</div>
-				<div class="item ">
-					<figure>
-						<img src="media/images/page3-4.jpg">
-						<figcaption>
-							<span> Công nghệ Hàn Quốc</span>
-							Sử dụng chỉ đôi xoắn chéo rất mảnh, có đặc tính bền bỉ, độ đàn hồi cao
-						</figcaption>
-					</figure>
-				</div>
-			</div>
-			<div class="video">
-				<a href="https://www.youtube.com/watch?v=r338HfXYds4" class="fancybox-media clip slide">Xem video Korean Beauty Triangle</a>
-			</div>
-			<a href="#register" class="btn reg slide ">Đăng ký tư vấn <span class="icon-angle-double-right "></span></a>
-		</div>
-
-	</div>
-</div>
-<div class="page4" id="process">
-	<div class="fixwidth">
-		<div class="title">
-			<span></span>QUY TRÌNH THỰC HIỆN<span></span>
-		</div>
-		<div class="text">
+		<div class="header-left col-lg-6 col-md-6 hidden-sm hidden-xs">
+			<h1 class="under-logo">Thẻ tín dụng</h1>
+			<p><span class="bold">tích dặm bay tốt nhất</span> <span class="normal">từ sacombank</span></p>
+			<p class=""><strong>Tặng</strong></p>
 			<div class="row">
-				<div class="col-sm-2"><span>1</span>Thăm khám, tư vấn, <br/> kiểm tra sức khỏe</div>
-				<div class="col-sm-2"><span>2</span>Đo vẽ <br/> thẩm mỹ</div>
-				<div class="col-sm-2"><span>3</span>Gây tê <br/>tại chỗ</div>
-				<div class="col-sm-2"><span>4</span>Tiến hành  <br/>bấm mí</div>
-				<div class="col-sm-2"><span>5</span>Chăm sóc <br/> sau bấm mí</div>
-				<div class="col-sm-2"><span>6</span>Tái khám</div>
+				<div class="number-flight col-lg-4 col-md-4 col-sm-4 col-xs-4">
+
+				</div>
+				<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+					<span class="large-txt">chuyến bay(*)</span><br/>
+					nhân sự kiện ra mắt
+					ngày <img src="img/date-bay.png" alt="ngày 12 tháng 12 năm 2016" width="120"><br/>
+					<p class="dk">* Điều kiện & điều khoản áp dụng</p>
+				</div>
+				<div class="col-md-12 col-sm-12 col-xs-12">
+					<div class="dk-bay"><a href="#">đăng ký ngay bay miễn phí</a></div>
+				</div>
 			</div>
+
 		</div>
-		<div class="ck">( Thời gian thực hiện: 20p )</div>
-	</div>
-</div>
-<div class="page5" id="customer">
-	<div class="fixwidth">
-		<div class="st slideanim">
-			<figure>
-				<figcaption>
-					HỌ TỎA SÁNG VÀ NỔI BẬT
-					<span>NHỜ <b>BẤM MÍ DOVE EYES</b></span>
-				</figcaption>
-				<img src="media/images/st.png">
-			</figure>
-		</div>
-	</div>
-</div>
-<div class="page6" id="sale">
-	<div class="fixwidth">
-		<div class="right">
-			<div class="countdown">
-				<span id="started1"></span>
-			</div>
-			<div class="percent">
-				<span>-<?php echo $count_down_sale; ?>%</span>
-			</div>
-			<div class="text">
-				<i>Chương trình Count Down Sale với <b>ưu đãi thay đổi theo từng ngày</b>  cho dịch vụ Bấm Mí Dove Eyes. <br/><b>Đăng ký ngay hôm nay</b> để được nhận ưu đãi lớn nhất.</i>
-			</div>
-		</div>
-		<div class="form slide" id="register">
-			<div>
-				<h3> Đăng ký tham gia <b>Nhận ưu đãi lên tới <?php echo $count_down_sale; ?>%</b></h3>
-				<h4>Áp dụng cho 50 khách hàng đăng kí sớm nhất</h4>
-				<article>
-					<form class="contact-form" id="contactform" method="post" action="index.php#register">
-						<?php if(isset($message)){ ?>
-							<p style="color: red; "> <?php echo $message; ?></p>
-						<?php } ?>
-						<div class="fct">
-							<input id="name" name="name" value="<?php if(isset($_POST['name'])) { echo $_POST['name']; } ?>" type="text" required placeholder="Họ tên *:" required oninvalid="setCustomValidity('Họ tên không để trống')" oninput="setCustomValidity('')">
-							<input id="email" name="email" value="<?php if(isset($_POST['email'])) { echo $_POST['email']; } ?>" type="text" required placeholder="Email *:" required pattern="[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" oninvalid="setCustomValidity('Email không chính xác!')" oninput="setCustomValidity('')">
-							<input id="phone" name="phone" value="<?php if(isset($_POST['phone'])) { echo $_POST['phone']; } ?>" type="text" required placeholder="Điện thoại *:" required pattern="^[0-9]{10,12}$" oninvalid="setCustomValidity('Số điện thoại không đúng')" oninput="setCustomValidity('')">
-							<select id="region" name="region" required oninvalid="setCustomValidity('Đăng ký tư vấn tại không để trống')" oninput="setCustomValidity('')">
-								<option value="" style="color:#ccc">Đăng ký tư vấn tại</option>
-								<option value="1" style="color:blue" <?php if(isset($_POST['region'])){if($_POST['region']==1) { ?> selected <?php } }?> >TP Hồ Chí Minh</option>
-								<option value="2" style="color:red" <?php if(isset($_POST['region'])){if($_POST['region']==2) { ?> selected <?php } }?>>Hà Nội</option>
-							</select>
-							<!--					<textarea name="itext" id="itext" cols="30" rows="10" placeholder="Dịch vụ quan tâm *:"></textarea>-->
-							<input type="hidden" name="aff_source" id="aff_source" class="aff_source" value=""/>
-							<input type="hidden" name="aff_sid" id="aff_sid" class="aff_sid" value=""/>
+		<div class="header-right col-lg-6 col-md-6 col-sm-12 col-xs-12">
+			<div class="form-reg col-lg-9 col-md-9 col-sm-12 col-xs-12 pull-right">
+				<form class='reg-now-visible' id='formIndex' action="index.php" method="post" accept-charset="utf-8" role="form">
+					<?php if(isset($message)){ ?>
+						<p style="color: red; text-align: center;"> <?php echo $message; ?></p>
+					<?php } ?>
+
+					<p>Thẻ Sacombank nằm trong tầm tay bạn. Hãy điền thông tin của bạn và chúng tôi sẽ gọi ngay cho bạn trong 24 giờ để hỗ trợ bạn đăng ký.</p>
+					<p>Bạn có Thẻ tín dụng Sacombank chưa?</p>
+
+					<div class="row">
+						<div class="col-lg-4 radio-custom radio-danger fl mr-10">
+							<input type="radio" id="yes" <?php if($_POST['luong']=="yes"){ echo "checked"; }?> name="luong" value="yes" required oninvalid="setCustomValidity('Xin vui lòng chọn một ô')" onclick="clearValidity()"/>
+							<label for="yes">Có</label>
 						</div>
-						<div class="dkbt">
-							<input class="target fbt bmk submit_s" type="submit" value="Đăng ký">
+						<div class="col-lg-4 radio-custom radio-danger fl">
+							<input type="radio" id="no" <?php if($_POST['luong']=="no"){ echo "checked"; }?> name="luong" value="no" required onclick="clearValidity()"/>
+							<label for="no">Chưa có</label>
 						</div>
-					</form>
-				</article>
-			</div>
-		</div>
-
-	</div>
-</div>
-
-
-<div class="kq">
-	<div class="container">
-		<p>(*) Kết quả tùy thuộc cơ địa của mỗi người</p>
-	</div>
-</div>
-<footer>
-	<div class="container">
-		<div class="row">
-			<div class="col-sm-4">
-				<div class="ftbox col1">
-					<div class="logocenter"><img src="media/images/logoft.png"></div>
-					<p>Giấy phép hoạt động số 181/BYT-GPHĐ <br>Chứng chỉ hành nghề số 003474/HNO-CCHN</p>
-					<!--  <div><b>Website : <a href="http://benhvienthammykangnam.vn/">www.benhvienthammykangnam.vn</a></b></div> -->
-					<!--  <div class="bstv-hl">Bác sĩ tư vấn (24/7) <b></b>
-                     </div> -->
-				</div>
-			</div>
-			<div class="col-sm-4">
-				<div class="ftbox col2">
-					<div class="place">Hà Nội</div>
-					<!-- <div>
-                      Tel: <a href="tel:0473006466">04.73.00.64.66</a><br>Mobile:<a class="zalovb" href="tel:0968999777" rel="nofollow">0968.999.777</a>
-                      <hr>
-                    </div> -->
-					<div><a class="chidan" rel="nofollow" target="_blank" href="https://www.google.com/maps/place/Th%E1%BA%A9m+M%E1%BB%B9+Vi%E1%BB%87n+Kangnam+T%E1%BA%A1i+H%C3%A0+N%E1%BB%99i/@21.0189961,105.8516408,16z/data=!4m2!3m1!1s0x3135ab920d07ad6b:0xaeafc086533191b">38 - Nguyễn Du - Q. Hai Bà Trưng - HN</a>
 					</div>
-				</div>
-			</div>
-			<div class="col-sm-4">
-				<div class="ftbox col2">
-					<div class="place">Tp. Hồ Chí Minh </div>
-					<!-- <div>
-                      Tel: <a href="tel:0873066466">08.73.06.64.66</a><br>Mobile: <a class="zalovb" href="tel:0948449988" id="callme" rel="nofollow">0948.44.99.88</a>
-                      <hr>
-                    </div> -->
-					<div>
-						<a class="chidan" rel="nofollow" target="_blank" href="https://maps.google.com/maps?q=Th%E1%BA%A9m+m%E1%BB%B9+vi%E1%BB%87n+Kangnam+T%E1%BA%A1i+H%E1%BB%93+Ch%C3%AD+Minh&amp;hl=vi&amp;ie=UTF8&amp;sll=10.773004,106.675208&amp;sspn=0.012521,0.021136&amp;hq=Th%E1%BA%A9m+m%E1%BB%B9+vi%E1%BB%87n+Kangnam+T%E1%BA%A1i&amp;hnear=Th%C3%A0nh+ph%E1%BB%91+H%E1%BB%93+Ch%C3%AD+Minh,+H%E1%BB%93+Ch%C3%AD+Minh,+Vi%E1%BB%87t+Nam&amp;t=m&amp;z=12">Số 84A - Bà Huyện Thanh Quan, P.9- Q.3- TP HCM</a>
-					</div>
-				</div>
+
+					<div style="clear:both;"></div>
+					<p>Thông tin cá nhân:</p>
+					<input id="name" class="input-txt" name="name" value="<?php if(isset($_POST['name'])) { echo $_POST['name']; } ?>" type="text" required placeholder="Họ tên *" required oninvalid="setCustomValidity('Họ tên không để trống')" oninput="setCustomValidity('')">
+					<input id="phone" class="input-txt" name="phone" value="<?php if(isset($_POST['phone'])) { echo $_POST['phone']; } ?>" type="text" required placeholder="Số điện thoại di động *" required pattern="^[0-9]{10,12}$" oninvalid="setCustomValidity('Số điện thoại di động không đúng')" oninput="setCustomValidity('')">
+					<input id="email" class="input-txt" name="email" value="<?php if(isset($_POST['email'])) { echo $_POST['email']; } ?>" type="text" required placeholder="Email *" required pattern="[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" oninvalid="setCustomValidity('Email không chính xác!')" oninput="setCustomValidity('')">
+
+					<select name="region" class="styled" required="" oninvalid="setCustomValidity('Khu vực sinh sống là bắt buộc')" oninput="setCustomValidity('')">
+						<option value="">Khu vực sinh sống*</option>
+						<option value="1" <?php if($_POST['region']==1){echo "selected"; }?>>Hà Nội</option>
+						<option value="2" <?php if($_POST['region']==2){echo "selected"; }?>>Hồ Chí Minh</option>
+						<option value="3" <?php if($_POST['region']==3){echo "selected"; }?>>Bình Dương</option>
+					</select>
+
+					<select name="caoch" class="styled" required="" oninvalid="setCustomValidity('Mức thu nhập của bạn là bắt buộc')" oninput="setCustomValidity('')">
+						<option value="">Mức thu nhập của bạn*</option>
+						<option value="1" <?php if($_POST['caoch']==1){echo "selected"; }?>>Lương dưới 10 triệu</option>
+						<option value="2" <?php if($_POST['caoch']==2){echo "selected"; }?>>Lương từ 10 triệu - 15 triệu</option>
+						<option value="3" <?php if($_POST['caoch']==3){echo "selected"; }?>>Lương từ 16 triệu - 20 triệu</option>
+						<option value="4" <?php if($_POST['caoch']==4){echo "selected"; }?>>Lương trên 20 triệu</option>
+					</select>
+
+					<select name="cardtype" class="styled" required="" oninvalid="setCustomValidity('Loại thẻ đăng ký là bắt buộc')" oninput="setCustomValidity('')">
+						<option value="">Loại thẻ đăng ký*</option>
+						<option value="1" <?php if($_POST['cardtype']==1){echo "selected"; }?>>visa</option>
+						<option value="2" <?php if($_POST['cardtype']==2){echo "selected"; }?>>Master</option>
+					</select>
+					<div style="clear:both; margin-bottom: 10px;"></div>
+					<input type="checkbox" name="agree_term" <?php if(isset($_POST['name'])) { echo "checked"; }?> value="agree" required="" oninvalid="setCustomValidity('Bạn phải đồng ý với điều khoản này')" onchange="setCustomValidity('')">  Tôi đồng ý rằng Sacombank có thể sử dụng thông tin trên đây để liên hệ với tôi nhằm giới thiệu những sản phẩm, dịch vụ và chương trình khuyến mãi của Sacombank từ nay trở về sau.<br>
+					<input type="hidden" name="aff_source" id="aff_source" class="aff_source" value=""/>
+					<input type="hidden" name="aff_sid" id="aff_sid" class="aff_sid" value=""/>
+					<center><button type="submit" value="Register Now" class='btn submit sub-form' name="submit">Hoàn thành & gửi</button></center>
+
+				</form>
 			</div>
 		</div>
 	</div>
-</footer>
+</section>
+<section id="tienich">
+	<div class="container">
+		<h2>Lợi ích vượt trội</h2>
+		<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 pull-right">
+			<img src="img/card.png" width="100%" alt="card"/>
+		</div>
+		<div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 pull-right">
+			<ul class="list-ich">
+				<li> Tích lũy 01 dặm Sacombank với mỗi 20.000 đồng chi tiêu bằng thẻ Sacombank Visa Signature.</li>
+				<li>  Linh hoạt quy đổi dặm Sacombank sang vé máy bay nhiều hãng hàng không
+					(gồm Vietnam Airlines, Vietjet Air, Jetstar Pacific), dặm xét hạng Vietnam Airlines,
+					phí thường niên hoặc tiền mặt.</li>
+				<li>Miễn phí thẻ Priority Pass sử dụng hơn 1.000 phòng chờ tại các sân bay toàn cầu.</li>
+				<li> Bảo hiểm du lịch lên đến 10,5 tỷ VNĐ</li>
+				<li>Tận hưởng đầy đủ các tiện ích của thẻ tín dụng quốc tế Sacombank như:
+					mua trước trả sau miễn lãi 55 ngày, thanh toán và rút tiền mặt
+					trong nước và quốc tế, mua sắm online và trả góp lãi suất 0%.
 
-<script src="media/js/jquery.min.js"></script>
-<script src="media/js/bootstrap.min.js"></script>
-<script src="media/js/slide_touch.js"></script>
-<script src="media/js/jquery.fancybox.pack.js"></script>
-<script src="media/js/jquery.fancybox-media.js"></script>
-<script src="media/js/jquery.countdown.js"></script>
-<script src="media/js/setup.js"></script>
+				</li>
+			</ul>
+		</div>
+	</div>
+</section>
+<section id="uu-dai">
+	<div class="container">
+		<h2>Ưu đãi đặc biệt</h2>
+		<div id="content-shape">
+			<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+				<div class="shape-two"><div class="shape-one"><img src="img/may-bay-mat-troi.jpg" alt="máy bay mặt trời" /></div></div>
+				<div style="clear:both;"></div>
+				<p class="uu-dai-txt">
+					Hoàn tiền cho 100 giao dịch mua vé máy bay online trên website chính thức của Vietnam Airlines, Vietjet Air và Jetstar Pacific đầu tiên đến hết 28/02/2016 bằng thẻ Sacombank Visa Signature. (*)
+					<br/> <span class="yellow-txt"> (*) Mỗi chủ thẻ được hoàn 1 lần, tối đa 1.000.000 VNĐ/vé nội địa hoặc 3.000.000 VNĐ/vé quốc tế</span></p>
+			</div>
+			<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+				<div class="shape-two"><div class="shape-one"><img src="img/may-bay-troi-xanh.jpg" alt="máy bay trời xanh" /></div></div>
+				<div style="clear:both;"></div>
+				<p class="uu-dai-txt">
+					Hoàn tiền cho 100 giao dịch mua vé máy bay online trên website chính thức của Vietnam Airlines, Vietjet Air và Jetstar Pacific đầu tiên đến hết 28/02/2016 bằng thẻ Sacombank Visa Signature. (*)
+					<br/> <span class="yellow-txt"> (*) Mỗi chủ thẻ được hoàn 1 lần, tối đa 1.000.000 VNĐ/vé nội địa hoặc 3.000.000 VNĐ/vé quốc tế</span></p>
+			</div>
+			<div style="clear:both;"></div>
+		</div>
+	</div>
+</section>
+<div style="clear:both;"></div>
+<section id="dieu-kien">
+	<div class="container">
+		<h2>điều kiện áp dụng</h2>
+		<ul>
+			<li class="list-over-18 col-lg-6 col-md-6 col-sm-12 col-xs-12">Từ 18 tuổi trở lên</li>
+			<li class="list-income col-lg-6 col-md-6 col-sm-12 col-xs-12">Thu nhập hàng tháng tối thiểu 60 triệu</li>
+		</ul>
+		<span class="dark-txt pull-right">Thưởng thêm dặm Sacombank cho khách hàng mở thẻ lần đầu:<br/>
+			-       500 dặm cho giao dịch đầu tiên (*)<br/>
+			-       4.5                                  00 dặm khi đạt 100.000.00 VND doanh số giao dịch (*)<br/>
+			(*) Áp dụng với giao dịch thanh toán, mua sắm trong 03 tháng đầu sử dụng thẻ
+		</span>
+	</div>
+</section>
+<section id="faq">
+	<div class="container">
+		<h2>faq</h2>
+		<div class="tab-content">
+			<div class="tab-pane fade in active" id="faq-page1">
+				<div class=" panel-group" id="accordion">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h4 class="panel-title">
+								<a data-toggle="collapse" data-parent="#accordion" href="#collapse1">Tỷ lệ quy đổi dặm Sacombank thành các tiện ích khác như thế nào?</a>
+							</h4>
+						</div>
+						<div id="collapse1" class="panel-collapse collapse in">
+							<div class="panel-body">
+								Khách hàng có thể linh động quy đổi dặm Sacombank tích lũy được sang các tiện ích khác với tỷ lệ như sau: <br/>
+								-	01 dặm Sacombank quy đổi 01 dặm Vietnam Airlines<br/>
+								-	10 dặm Sacombank quy đổi 01 dặm xét hạng Vietnam Airlines<br/>
+								-	01 dặm Sacombank quy đổi 100 VNĐ tiền mặt hoặc phí thường niên<br/>
+								Tỷ lệ này sẽ thay đổi theo từng thời kỳ. <br/>
+							</div>
+						</div>
+					</div>
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h4 class="panel-title">
+								<a data-toggle="collapse" data-parent="#accordion" href="#collapse2">Khách hàng muốn quy đổi dặm Sacombank thì làm như thế nào?</a>
+							</h4>
+						</div>
+						<div id="collapse2" class="panel-collapse collapse">
+							<div class="panel-body">Để quy đổi dặm Sacombank, khách hàng liên hệ tổng đài VIP Sacombank 1 800 5858 23.</div>
+						</div>
+					</div>
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h4 class="panel-title">
+								<a data-toggle="collapse" data-parent="#accordion" href="#collapse3">Thẻ tín dụng Visa Signature có được tích điểm đổi quà chương trình “Thế giới điểm thưởng” không?</a>
+							</h4>
+						</div>
+						<div id="collapse3" class="panel-collapse collapse">
+							<div class="panel-body">Thẻ tín dụng Visa Signature chỉ sử dụng để tích lũy dặm Sacombank, không tích diểm đổi quà chương trình “Thế giới điểm thưởng”. </div>
+						</div>
+					</div>
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h4 class="panel-title">
+								<a data-toggle="collapse" data-parent="#accordion" href="#collapse4">Chủ thẻ tín dụng quốc tế hiện hữu chuyển đổi sang thẻ Visa Signature thì điểm “Thế giới điểm thưởng” tích lũy được có được chuyển sang thẻ mới không?</a>
+							</h4>
+						</div>
+						<div id="collapse4" class="panel-collapse collapse">
+							<div class="panel-body">Chủ thẻ tín dụng hiện hữu đủ điều kiện chuyển đổi sang thẻ Visa Signature sẽ được quy đổi điểm “Thế giới điểm thưởng” đã tích lũy được sang dặm Sacombank theo tỷ lệ: 20 điểm Thế giới điểm thưởng = 01 dặm Sacombank.
+
+								Việc quy đổi này chỉ áp dụng 01 lần duy nhất tại thời điểm chuyển đổi thẻ Visa Signature.
+							</div>
+						</div>
+					</div>
+					<!--<div class="panel panel-default">
+                     <div class="panel-heading">
+                       <h4 class="panel-title">
+                         <a data-toggle="collapse" data-parent="#accordion" href="#collapse5">5.	Thẻ tín dụng hiện hữu của khách hàng được miễn/giảm phí thường niên, khi chuyển đổi sang thẻ Visa Signature có giữ nguyên chính sách PTN cũ?</a>
+                       </h4>
+                     </div>
+                    <div id="collapse5" class="panel-collapse collapse">
+                       <div class="panel-body">Mức phí thường niên 1.499.000 VNĐ áp dụng cho tất cả các đối tượng khách hàng (ngoại trừ khách hàng dịch vụ ngân hàng cao cấp). Theo đó, khi khách hàng chuyển đổi thẻ tín dụng hiện hữu sang thẻ Visa Signature thì PTN sẽ được điều chỉnh thành thu phí thường niên các năm (Fee code 2).
+
+       Ví dụ:
+       Khách hàng mở thẻ tín dụng Visa Platinum vào tháng 08/2015 với fee code 4 – miễn phí thường niên năm 1. Đến tháng 08/2016 khách hàng bị thu 999.000 VNĐ PTN năm 2. Ngày 15/12/2016, thẻ được chuyển đổi sang thẻ Visa Signature:
+       -	Tại thời điểm chuyển đổi: fee code của khách hàng sẽ được chuyển đổi thành fee code 2 – thu PTN các năm
+       -	Thời gian thu PTN lần đầu của thẻ Signature (tương đương PTN năm 1 của thẻ Signature): tháng 08/2017
+       -	Tại thời điểm chuyển đổi, khách hàng không bị thu các khoản phí liên quan đến việc chuyển đổi, ngoại trừ phí nâng hạn mức (nếu có)
+        </div>
+                     </div>
+                   </div>	-->
+				</div>
+			</div>
+			<div class="tab-pane fade" id="faq-page2">
+				<div class="panel-group" id="accordion2">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h4 class="panel-title">
+								<a data-toggle="collapse" data-parent="#accordion2" href="#collapse5">Thẻ tín dụng hiện hữu của khách hàng được miễn/giảm phí thường niên, khi chuyển đổi sang thẻ Visa Signature có giữ nguyên chính sách PTN cũ?</a>
+							</h4>
+						</div>
+						<div id="collapse5" class="panel-collapse collapse in">
+							<div class="panel-body">
+								Mức phí thường niên 1.499.000 VNĐ áp dụng cho tất cả các đối tượng khách hàng (ngoại trừ khách hàng dịch vụ ngân hàng cao cấp). Theo đó, khi khách hàng chuyển đổi thẻ tín dụng hiện hữu sang thẻ Visa Signature thì PTN sẽ được điều chỉnh thành thu phí thường niên các năm (Fee code 2).
+
+								Ví dụ:
+								Khách hàng mở thẻ tín dụng Visa Platinum vào tháng 08/2015 với fee code 4 – miễn phí thường niên năm 1. Đến tháng 08/2016 khách hàng bị thu 999.000 VNĐ PTN năm 2. Ngày 15/12/2016, thẻ được chuyển đổi sang thẻ Visa Signature:
+								-	Tại thời điểm chuyển đổi: fee code của khách hàng sẽ được chuyển đổi thành fee code 2 – thu PTN các năm
+								-	Thời gian thu PTN lần đầu của thẻ Signature (tương đương PTN năm 1 của thẻ Signature): tháng 08/2017
+								-	Tại thời điểm chuyển đổi, khách hàng không bị thu các khoản phí liên quan đến việc chuyển đổi, ngoại trừ phí nâng hạn mức (nếu có)
+
+							</div>
+						</div>
+					</div>
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h4 class="panel-title">
+								<a data-toggle="collapse" data-parent="#accordion2" href="#collapse6">Đối tượng hưởng ưu đãi chương trình khuyến mãi”?</a>
+							</h4>
+						</div>
+						<div id="collapse6" class="panel-collapse collapse">
+							<div class="panel-body">Khách hàng sở hữu thẻ tín dụng Visa Signature (không áp dụng cho CBNV Sacombank & Cty trực thuộc) từ ngày 12.12.2016 và có mã đóng phí thường niên 100% năm đầu thực hiện mua vé máy bay online từ ngày 12.12.2016 – 28.02.2017 trên trang web: www.vietnamairlines.com hoặc www.jetstar.com hoặc www.vietjetair.com</div>
+						</div>
+					</div>
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h4 class="panel-title">
+								<a data-toggle="collapse" data-parent="#accordion2" href="#collapse7">Thẻ phụ Visa Signature có được tham gia chương trình hoàn tiền 100 chuyến bay đầu tiên khi mở và sử dụng thẻ sớm nhất không?</a>
+							</h4>
+						</div>
+						<div id="collapse7" class="panel-collapse collapse">
+							<div class="panel-body">Doanh số giao dịch từ thẻ phụ sẽ được ghi nhận cho thẻ chính Visa Signature. Sacombank thực hiện hoàn tiền trên tài khoản thẻ của chủ thẻ chính.</div>
+						</div>
+					</div>
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h4 class="panel-title">
+								<a data-toggle="collapse" data-parent="#accordion2" href="#collapse8">Chủ thẻ chỉ cần mở thẻ và giao dịch mua vé online sớm nhất trong số 100 KH được hưởng ưu đãi từ chương trình là chủ thẻ sẽ được nhận hoàn tiền?</a>
+							</h4>
+						</div>
+						<div id="collapse8" class="panel-collapse collapse">
+							<div class="panel-body">đúng
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+			<div class="tab-pane fade" id="faq-page3">
+				<div class="panel-group" id="accordion3">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h4 class="panel-title">
+								<a data-toggle="collapse" data-parent="#accordion3" href="#collapse9">Số lần, số tiền chủ thẻ được hoàn tiền trong thời gian chương trình?</a>
+							</h4>
+						</div>
+						<div id="collapse9" class="panel-collapse collapse in">
+							<div class="panel-body">
+								Mỗi chủ thẻ chính được hoàn tiền 1 lần duy nhất cho giao dịch đầu tiên thỏa điều kiện trong suốt thời gian chương trình. Số tiền hoàn: 3 triệu đồng/vé quốc tế, 1 triệu đồng/vé nội địa nhưng không vượt quá số tiền chủ thẻ đã mua vé máy bay.
+							</div>
+						</div>
+					</div>
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h4 class="panel-title">
+								<a data-toggle="collapse" data-parent="#accordion3" href="#collapse10">Nếu khách hàng nằm trong danh sách 100 KH mua vé thỏa điều kiện sớm nhất của chương trình? Trình tự hoàn tiền như thế nào?</a>
+							</h4>
+						</div>
+						<div id="collapse10" class="panel-collapse collapse">
+							<div class="panel-body">Khách hàng sở hữu thẻ tín dụng Visa Signature (không áp dụng cho CBNV Sacombank & Cty trực thuộc) từ ngày 12.12.2016 và có mã đóng phí thường niên 100% năm đầu thực hiện mua vé máy bay online từ ngày 12.12.2016 – 28.02.2017 trên trang web: www.vietnamairlines.com hoặc www.jetstar.com hoặc www.vietjetair.com</div>
+						</div>
+					</div>
+
+
+				</div>
+			</div>
+		</div>
+
+		<center><ul class="faq-page-navi pagination">
+
+				<li  class="active"><a data-toggle="tab" href="#faq-page1">1</a></li>
+				<li><a data-toggle="tab" href="#faq-page2">2</a></li>
+				<li><a data-toggle="tab" href="#faq-page3">3</a></li>
+
+
+			</ul></center>
+
+	</div>
+
+</section>
+<section id="footer">
+	<div class="container">
+		<div class="footer-txt col-lg-6 col-md-6 col-sm-12 col-xs-12 pull-left">
+			Copyright (C) 2016 Accesstrad VN & Sacomabank
+		</div>
+		<div class="footer-logo col-lg-6 col-md-6 col-sm-12 col-xs-12 pull-right">
+			<img src="img/logo-accesstrade.png" alt="logo accesstrade"/><img src="img/logo-saccom.png" alt="logo saccombank"/><img src="img/logo-norton.png" alt="logo norton secure"/>
+		</div>
+
+	</div>
+</section>
+<script src="js/jquery-1.10.1.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
 
 <script src="//cdn.accesstrade.vn/js/tracking.js" ></script>
 <script type="text/javascript">
@@ -453,8 +475,10 @@ if(isset($_POST['name'])) {
 	$("#aff_sid").val(getCookie("_aff_sid"));
 </script>
 
-
-
 </body>
 </html>
+
+
+
+
 
