@@ -53,7 +53,7 @@ if(isset($_POST['name'])) {
 			),
 			array(
 				'property' => 'identifier',
-				'value' => (string)$t
+				'value' => (string)$t.'_'.$_POST['email']
 			),
 			array(
 				'property' => 'hs_lead_status',
@@ -237,15 +237,14 @@ if(isset($_POST['name'])) {
 	<div class="container">
 		<h2>faq</h2>
 		<div class="tab-content">
-			<div class="tab-pane fade in active" id="faq-page1">
-				<div class=" panel-group" id="accordion">
+			<div class="tab-pane fade in active">
 					<div class="panel panel-default">
 						<div class="panel-heading">
 							<h4 class="panel-title">
 								<a data-toggle="collapse" data-parent="#accordion" href="#collapse1">Tỷ lệ quy đổi dặm Sacombank thành các tiện ích khác như thế nào?</a>
 							</h4>
 						</div>
-						<div id="collapse1" class="panel-collapse collapse in">
+						<div id="collapse1" class="panel-collapse collapse">
 							<div class="panel-body">
 								Khách hàng có thể linh động quy đổi dặm Sacombank tích lũy được sang các tiện ích khác với tỷ lệ như sau: <br/>
 								-	01 dặm Sacombank quy đổi 01 dặm Vietnam Airlines<br/>
@@ -288,34 +287,13 @@ if(isset($_POST['name'])) {
 							</div>
 						</div>
 					</div>
-					<!--<div class="panel panel-default">
-                     <div class="panel-heading">
-                       <h4 class="panel-title">
-                         <a data-toggle="collapse" data-parent="#accordion" href="#collapse5">5.	Thẻ tín dụng hiện hữu của khách hàng được miễn/giảm phí thường niên, khi chuyển đổi sang thẻ Visa Signature có giữ nguyên chính sách PTN cũ?</a>
-                       </h4>
-                     </div>
-                    <div id="collapse5" class="panel-collapse collapse">
-                       <div class="panel-body">Mức phí thường niên 1.499.000 VNĐ áp dụng cho tất cả các đối tượng khách hàng (ngoại trừ khách hàng dịch vụ ngân hàng cao cấp). Theo đó, khi khách hàng chuyển đổi thẻ tín dụng hiện hữu sang thẻ Visa Signature thì PTN sẽ được điều chỉnh thành thu phí thường niên các năm (Fee code 2).
-
-       Ví dụ:
-       Khách hàng mở thẻ tín dụng Visa Platinum vào tháng 08/2015 với fee code 4 – miễn phí thường niên năm 1. Đến tháng 08/2016 khách hàng bị thu 999.000 VNĐ PTN năm 2. Ngày 15/12/2016, thẻ được chuyển đổi sang thẻ Visa Signature:
-       -	Tại thời điểm chuyển đổi: fee code của khách hàng sẽ được chuyển đổi thành fee code 2 – thu PTN các năm
-       -	Thời gian thu PTN lần đầu của thẻ Signature (tương đương PTN năm 1 của thẻ Signature): tháng 08/2017
-       -	Tại thời điểm chuyển đổi, khách hàng không bị thu các khoản phí liên quan đến việc chuyển đổi, ngoại trừ phí nâng hạn mức (nếu có)
-        </div>
-                     </div>
-                   </div>	-->
-				</div>
-			</div>
-			<div class="tab-pane fade" id="faq-page2">
-				<div class="panel-group" id="accordion2">
 					<div class="panel panel-default">
 						<div class="panel-heading">
 							<h4 class="panel-title">
 								<a data-toggle="collapse" data-parent="#accordion2" href="#collapse5">Thẻ tín dụng hiện hữu của khách hàng được miễn/giảm phí thường niên, khi chuyển đổi sang thẻ Visa Signature có giữ nguyên chính sách PTN cũ?</a>
 							</h4>
 						</div>
-						<div id="collapse5" class="panel-collapse collapse in">
+						<div id="collapse5" class="panel-collapse collapse">
 							<div class="panel-body">
 								Mức phí thường niên 1.499.000 VNĐ áp dụng cho tất cả các đối tượng khách hàng (ngoại trừ khách hàng dịch vụ ngân hàng cao cấp). Theo đó, khi khách hàng chuyển đổi thẻ tín dụng hiện hữu sang thẻ Visa Signature thì PTN sẽ được điều chỉnh thành thu phí thường niên các năm (Fee code 2).
 
@@ -359,18 +337,13 @@ if(isset($_POST['name'])) {
 							</div>
 						</div>
 					</div>
-
-				</div>
-			</div>
-			<div class="tab-pane fade" id="faq-page3">
-				<div class="panel-group" id="accordion3">
 					<div class="panel panel-default">
 						<div class="panel-heading">
 							<h4 class="panel-title">
 								<a data-toggle="collapse" data-parent="#accordion3" href="#collapse9">Số lần, số tiền chủ thẻ được hoàn tiền trong thời gian chương trình?</a>
 							</h4>
 						</div>
-						<div id="collapse9" class="panel-collapse collapse in">
+						<div id="collapse9" class="panel-collapse collapse">
 							<div class="panel-body">
 								Mỗi chủ thẻ chính được hoàn tiền 1 lần duy nhất cho giao dịch đầu tiên thỏa điều kiện trong suốt thời gian chương trình. Số tiền hoàn: 3 triệu đồng/vé quốc tế, 1 triệu đồng/vé nội địa nhưng không vượt quá số tiền chủ thẻ đã mua vé máy bay.
 							</div>
@@ -386,28 +359,16 @@ if(isset($_POST['name'])) {
 							<div class="panel-body">Khách hàng sở hữu thẻ tín dụng Visa Signature (không áp dụng cho CBNV Sacombank & Cty trực thuộc) từ ngày 12.12.2016 và có mã đóng phí thường niên 100% năm đầu thực hiện mua vé máy bay online từ ngày 12.12.2016 – 28.02.2017 trên trang web: www.vietnamairlines.com hoặc www.jetstar.com hoặc www.vietjetair.com</div>
 						</div>
 					</div>
-
-
 				</div>
 			</div>
 		</div>
-
-		<center><ul class="faq-page-navi pagination">
-
-				<li  class="active"><a data-toggle="tab" href="#faq-page1">1</a></li>
-				<li><a data-toggle="tab" href="#faq-page2">2</a></li>
-				<li><a data-toggle="tab" href="#faq-page3">3</a></li>
-
-
-			</ul></center>
-
 	</div>
 
 </section>
 <section id="footer">
 	<div class="container">
 		<div class="footer-txt col-lg-6 col-md-6 col-sm-12 col-xs-12 pull-left">
-			Copyright (C) 2016 Accesstrade VN & Sacomabank
+			Copyright (C) 2016 Accesstrade VN & Sacombank
 		</div>
 		<div class="footer-logo col-lg-6 col-md-6 col-sm-12 col-xs-12 pull-right">
 			<img src="img/logo-accesstrade.png" alt="logo accesstrade"/><img src="img/logo-saccom.png" alt="logo saccombank"/><img src="img/logo-norton.png" alt="logo norton secure"/>
