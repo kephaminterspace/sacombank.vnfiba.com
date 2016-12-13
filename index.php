@@ -23,7 +23,7 @@ if(isset($_POST['submit_form'])) {
 
 	$email = $_POST['email'];
 	if (!validateEmail($email)) {
-		$messages[] = 'Email không để đúng';
+		$messages[] = 'Email không đúng';
 	}
 
 	if (!($_POST['address'])) {
