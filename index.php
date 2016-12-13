@@ -238,6 +238,7 @@ if(isset($_POST['name'])) {
 		<h2>faq</h2>
 		<div class="tab-content">
 			<div class="tab-pane fade in active">
+				<div class="panel-group">
 					<div class="panel panel-default">
 						<div class="panel-heading">
 							<h4 class="panel-title">
@@ -306,6 +307,8 @@ if(isset($_POST['name'])) {
 							</div>
 						</div>
 					</div>
+				</div>
+				<div class="panel-group">
 					<div class="panel panel-default">
 						<div class="panel-heading">
 							<h4 class="panel-title">
