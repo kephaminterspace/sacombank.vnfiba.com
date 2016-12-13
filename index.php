@@ -184,7 +184,7 @@ if(isset($_POST['submit_form'])) {
 					<textarea id="note" name="note" class="input-txt" rows="8" style="height: 60px;" placeholder="Ghi chú"><?php if(isset($_POST['note'])) { echo $_POST['note']; } ?></textarea>
 
 					<div style="clear:both; margin-bottom: 10px;"></div>
-					<input type="checkbox" name="agree_term" <?php if(isset($_POST['name'])) { echo "checked"; }?> value="agree" required="" oninvalid="setCustomValidity('Bạn phải đồng ý với điều khoản này')" onchange="setCustomValidity('')">  Tôi đồng ý rằng Sacombank có thể sử dụng thông tin trên đây để liên hệ với tôi nhằm giới thiệu những sản phẩm, dịch vụ và chương trình khuyến mãi của Sacombank từ nay trở về sau.<br>
+					<input type="checkbox" name="agree_term" <?php if(isset($_POST['agree_term'])) { echo "checked"; }?> value="agree" required="" oninvalid="setCustomValidity('Bạn phải đồng ý với điều khoản này')" onchange="setCustomValidity('')">  Tôi đồng ý rằng Sacombank có thể sử dụng thông tin trên đây để liên hệ với tôi nhằm giới thiệu những sản phẩm, dịch vụ và chương trình khuyến mãi của Sacombank từ nay trở về sau.<br>
 					<input type="hidden" name="aff_source" id="aff_source" class="aff_source" value=""/>
 					<input type="hidden" name="aff_sid" id="aff_sid" class="aff_sid" value=""/>
 					<input type="hidden" name="submit_form"  value="1"/>
