@@ -1,85 +1,109 @@
 
 <?php
-$message = '';
-$t=time();
-$day = date('d');
 
-$count_down_sale = (31-$day);
-if($count_down_sale<=20){
-	$count_down_sale = 20;
+
+function validateEmail($email){
+	return filter_var($email, FILTER_VALIDATE_EMAIL);
 }
-//CASH_IN_HAND
-//BANK_TRANSFER
 
 
-if(isset($_POST['name'])) {
-	$arr = array(
-		'properties' => array(
-			array(
-				'property' => 'luong',
-				'value' => $_POST['luong']
-			),
-			array(
-				'property' => 'email',
-				'value' => $_POST['email']
-			),
-			array(
-				'property' => 'firstname',
-				'value' => $_POST['name']
-			),
-			array(
-				'property' => 'lastname',
-				'value' => ''
-			),
-			array(
-				'property' => 'phone',
-				'value' => $_POST['phone']
-			),
-			array(
-				'property' => 'address',
-				'value' => $_POST['address']
-			),
-			array(
-				'property' => 'note',
-				'value' => $_POST['note']
-			),
-			array(
-				'property' => 'aff_source',
-				'value' => $_POST['aff_source']
-			),
-			array(
-				'property' => 'aff_sid',
-				'value' => $_POST['aff_sid']
-			),
-			array(
-				'property' => 'identifier',
-				'value' => (string)$t.'_'.$_POST['email']
-			),
-			array(
-				'property' => 'hs_lead_status',
-				'value' => "NEW"
+if(isset($_POST['submit_form'])) {
+	$messages = [];
+	if (!isset($_POST['luong'])) {
+		$messages[] = 'Xin vui lòng chọn một ô Có hoặc Không có';
+	}
+
+	if (!($_POST['name'])) {
+		$messages[] = 'Họ tên không để trống';
+	}
+
+	if (!($_POST['phone'])) {
+		$messages[] = 'Số điện thoại di động không để trống';
+	}
+
+	$email = $_POST['email'];
+	if (!validateEmail($email)) {
+		$messages[] = 'Email không để đúng';
+	}
+
+	if (!($_POST['address'])) {
+		$messages[] = 'Khu vực sinh sống là bắt buộc';
+	}
+
+	if (!isset($_POST['agree_term'])) {
+		$messages[] = 'Bạn phải đồng ý với điều khoản của chúng tôi';
+	}
+
+	if (count($messages) == 0) {
+		$t=time();
+		$arr = array(
+			'properties' => array(
+				array(
+					'property' => 'luong',
+					'value' => $_POST['luong']
+				),
+				array(
+					'property' => 'email',
+					'value' => $_POST['email']
+				),
+				array(
+					'property' => 'firstname',
+					'value' => $_POST['name']
+				),
+				array(
+					'property' => 'lastname',
+					'value' => ''
+				),
+				array(
+					'property' => 'phone',
+					'value' => $_POST['phone']
+				),
+				array(
+					'property' => 'address',
+					'value' => $_POST['address']
+				),
+				array(
+					'property' => 'note',
+					'value' => $_POST['note']
+				),
+				array(
+					'property' => 'aff_source',
+					'value' => $_POST['aff_source']
+				),
+				array(
+					'property' => 'aff_sid',
+					'value' => $_POST['aff_sid']
+				),
+				array(
+					'property' => 'identifier',
+					'value' => (string)$t . '_' . $_POST['email']
+				),
+				array(
+					'property' => 'hs_lead_status',
+					'value' => "NEW"
+				)
 			)
-		)
-	);
+		);
 
-	$post_json = json_encode($arr);
-	$endpoint = "https://api.hubapi.com/contacts/v1/contact/?hapikey=3f189c19-d757-485a-9882-7d9e504dec59";
-	$ch = @curl_init();
-	@curl_setopt($ch, CURLOPT_POST, true);
-	@curl_setopt($ch, CURLOPT_POSTFIELDS, $post_json);
-	@curl_setopt($ch, CURLOPT_URL, $endpoint);
-	@curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
-	@curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-	$response = @curl_exec($ch);
+		$post_json = json_encode($arr);
+		$endpoint = "https://api.hubapi.com/contacts/v1/contact/?hapikey=3f189c19-d757-485a-9882-7d9e504dec59";
+		$ch = @curl_init();
+		@curl_setopt($ch, CURLOPT_POST, true);
+		@curl_setopt($ch, CURLOPT_POSTFIELDS, $post_json);
+		@curl_setopt($ch, CURLOPT_URL, $endpoint);
+		@curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
+		@curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+		$response = @curl_exec($ch);
 
-	$status_code = @curl_getinfo($ch, CURLINFO_HTTP_CODE);
-	$curl_errors = curl_error($ch);
-	@curl_close($ch);
-	if ($status_code == 200) {
-		header('Location: thank.php');
-		die();
-	}else{
-		$message = 'Email đã tồn tại';
+		$status_code = @curl_getinfo($ch, CURLINFO_HTTP_CODE);
+		$curl_errors = curl_error($ch);
+		@curl_close($ch);
+		if ($status_code == 200) {
+			header('Location: thank.php');
+			die();
+		} else {
+			$messages[] = 'Email đã tồn tại';
+		}
 	}
 }
 ?>
@@ -136,9 +160,13 @@ if(isset($_POST['name'])) {
 		<div class="header-right col-lg-6 col-md-6 col-sm-12 col-xs-12">
 			<div class="form-reg col-lg-9 col-md-9 col-sm-12 col-xs-12 pull-right">
 				<form class='reg-now-visible' id='formIndex' action="index.php" method="post" accept-charset="utf-8" role="form">
-					<?php if(isset($message)){ ?>
-						<p style="color: red; text-align: center;"> <?php echo $message; ?></p>
-					<?php } ?>
+					<?php if(isset($messages)){
+						foreach ($messages as $message){
+							?>
+							<p style="color: red; text-align: center;"> <?php echo $message; ?></p>
+							<?php
+						}
+					} ?>
 
 					<p>Thẻ Sacombank nằm trong tầm tay bạn. Hãy điền thông tin của bạn và chúng tôi sẽ gọi ngay cho bạn trong 24 giờ để hỗ trợ bạn đăng ký.</p>
 					<p>Bạn có Thẻ tín dụng Sacombank chưa?</p>
@@ -166,6 +194,7 @@ if(isset($_POST['name'])) {
 					<input type="checkbox" name="agree_term" <?php if(isset($_POST['name'])) { echo "checked"; }?> value="agree" required="" oninvalid="setCustomValidity('Bạn phải đồng ý với điều khoản này')" onchange="setCustomValidity('')">  Tôi đồng ý rằng Sacombank có thể sử dụng thông tin trên đây để liên hệ với tôi nhằm giới thiệu những sản phẩm, dịch vụ và chương trình khuyến mãi của Sacombank từ nay trở về sau.<br>
 					<input type="hidden" name="aff_source" id="aff_source" class="aff_source" value=""/>
 					<input type="hidden" name="aff_sid" id="aff_sid" class="aff_sid" value=""/>
+					<input type="hidden" name="submit_form"  value="1"/>
 					<center><button type="submit" value="Register Now" class='btn submit sub-form' name="submit">Hoàn thành & gửi</button></center>
 
 				</form>
