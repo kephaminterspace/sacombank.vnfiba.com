@@ -143,16 +143,16 @@ if(isset($_POST['name'])) {
 					<p>Thẻ Sacombank nằm trong tầm tay bạn. Hãy điền thông tin của bạn và chúng tôi sẽ gọi ngay cho bạn trong 24 giờ để hỗ trợ bạn đăng ký.</p>
 					<p>Bạn có Thẻ tín dụng Sacombank chưa?</p>
 
-					<div class="row">
-						<div class="col-lg-4 radio-custom radio-danger fl mr-10">
-							<input type="radio" id="yes" <?php if(isset($_POST['luong'])) { if($_POST['luong']=="yes"){ echo "checked"; }}?> name="luong" value="yes" required oninvalid="setCustomValidity('Xin vui lòng chọn một ô')" onclick="clearValidity()"/>
-							<label for="yes">Có</label>
-						</div>
-						<div class="col-lg-4 radio-custom radio-danger fl">
-							<input type="radio" id="no" <?php if(isset($_POST['luong'])) { if($_POST['luong']=="no"){ echo "checked"; }}?> name="luong" value="no" required onclick="clearValidity()"/>
-							<label for="no">Chưa có</label>
-						</div>
+
+					<div class="radio-custom radio-danger fl mr-10">
+						<input type="radio" id="yes" <?php if(isset($_POST['luong'])) { if($_POST['luong']=="yes"){ echo "checked"; }}?> name="luong" value="yes" required oninvalid="setCustomValidity('Xin vui lòng chọn một ô')" onclick="clearValidity()"/>
+						<label for="yes">Có</label>
 					</div>
+					<div class="radio-custom radio-danger fl">
+						<input type="radio" id="no" <?php if(isset($_POST['luong'])) { if($_POST['luong']=="no"){ echo "checked"; }}?> name="luong" value="no" required onclick="clearValidity()"/>
+						<label for="no">Chưa có</label>
+					</div>
+
 
 					<div style="clear:both;"></div>
 					<p>Thông tin cá nhân:</p>
