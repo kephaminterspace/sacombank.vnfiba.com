@@ -9,25 +9,21 @@ function validateEmail($email){
 
 if(isset($_POST['submit_form'])) {
 	$messages = [];
-	if (!isset($_POST['luong'])) {
-		$check_messages['luong'] = 'style="border: 2px solid red;"';
-	}
-
 	if (!($_POST['name'])) {
-		$check_messages['name'] = 'border: 2px solid red;';
+		$check_messages['name'] = 'style="border: 2px solid red;"';
 	}
 
 	if (!($_POST['phone'])) {
-		$check_messages['phone'] = 'border: 2px solid red;';
+		$check_messages['phone'] = 'style="border: 2px solid red;"';
 	}
 
 	$email = $_POST['email'];
 	if (!validateEmail($email)) {
-		$check_messages['email'] = 'border: 2px solid red;';
+		$check_messages['email'] = 'style="border: 2px solid red;"';
 	}
 
 	if (!($_POST['address'])) {
-		$check_messages['address'] = 'border: 2px solid red;';
+		$check_messages['address'] = 'style="border: 2px solid red;"';
 	}
 
 	if (!isset($_POST['agree_term'])) {
