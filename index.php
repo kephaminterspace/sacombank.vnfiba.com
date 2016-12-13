@@ -13,15 +13,11 @@ if($count_down_sale<=20){
 
 
 if(isset($_POST['name'])) {
-			$luong = "CASH_IN_HAND";
-            if($_POST['luong'] == "yes"){
-				$luong = "BANK_TRANSFER";
-			}
 	$arr = array(
 		'properties' => array(
 			array(
 				'property' => 'luong',
-				'value' => $luong
+				'value' => $_POST['luong']
 			),
 			array(
 				'property' => 'email',
@@ -40,16 +36,12 @@ if(isset($_POST['name'])) {
 				'value' => $_POST['phone']
 			),
 			array(
-				'property' => 'region',
-				'value' => $_POST['region']
+				'property' => 'address',
+				'value' => $_POST['address']
 			),
 			array(
-				'property' => 'cardtype',
-				'value' => $_POST['cardtype']
-			),
-			array(
-				'property' => 'caoch',
-				'value' => $_POST['caoch']
+				'property' => 'note',
+				'value' => $_POST['note']
 			),
 			array(
 				'property' => 'aff_source',
@@ -106,7 +98,7 @@ if(isset($_POST['name'])) {
 	<meta content="" name="keywords">
 	<meta content="" name="description">
 	<link href="https://fonts.googleapis.com/css?family=Roboto+Slab&amp;subset=vietnamese" rel="stylesheet">
-	<link type="image/x-icon" href="img/fav.png" rel="shortcut icon">
+	<link type="image/x-icon" href="img/favicon.ico" rel="shortcut icon">
 	<link rel="stylesheet" href="css/bootstrap.css">
 	<link rel="stylesheet" href="css/font-awesome.css">
 	<link rel="stylesheet" href="style.css">
@@ -153,41 +145,23 @@ if(isset($_POST['name'])) {
 
 					<div class="row">
 						<div class="col-lg-4 radio-custom radio-danger fl mr-10">
-							<input type="radio" id="yes" <?php if($_POST['luong']=="yes"){ echo "checked"; }?> name="luong" value="yes" required oninvalid="setCustomValidity('Xin vui lòng chọn một ô')" onclick="clearValidity()"/>
+							<input type="radio" id="yes" <?php if(isset($_POST['luong'])) { if($_POST['luong']=="yes"){ echo "checked"; }}?> name="luong" value="yes" required oninvalid="setCustomValidity('Xin vui lòng chọn một ô')" onclick="clearValidity()"/>
 							<label for="yes">Có</label>
 						</div>
 						<div class="col-lg-4 radio-custom radio-danger fl">
-							<input type="radio" id="no" <?php if($_POST['luong']=="no"){ echo "checked"; }?> name="luong" value="no" required onclick="clearValidity()"/>
+							<input type="radio" id="no" <?php if(isset($_POST['luong'])) { if($_POST['luong']=="no"){ echo "checked"; }}?> name="luong" value="no" required onclick="clearValidity()"/>
 							<label for="no">Chưa có</label>
 						</div>
 					</div>
 
 					<div style="clear:both;"></div>
 					<p>Thông tin cá nhân:</p>
-					<input id="name" class="input-txt" name="name" value="<?php if(isset($_POST['name'])) { echo $_POST['name']; } ?>" type="text" required placeholder="Họ tên *" required oninvalid="setCustomValidity('Họ tên không để trống')" oninput="setCustomValidity('')">
-					<input id="phone" class="input-txt" name="phone" value="<?php if(isset($_POST['phone'])) { echo $_POST['phone']; } ?>" type="text" required placeholder="Số điện thoại di động *" required pattern="^[0-9]{10,12}$" oninvalid="setCustomValidity('Số điện thoại di động không đúng')" oninput="setCustomValidity('')">
-					<input id="email" class="input-txt" name="email" value="<?php if(isset($_POST['email'])) { echo $_POST['email']; } ?>" type="text" required placeholder="Email *" required pattern="[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" oninvalid="setCustomValidity('Email không chính xác!')" oninput="setCustomValidity('')">
+					<input id="name" class="input-txt" name="name" value="<?php if(isset($_POST['name'])) { echo $_POST['name']; } ?>" type="text" required placeholder="Họ tên *" oninvalid="setCustomValidity('Họ tên không để trống')" oninput="setCustomValidity('')">
+					<input id="phone" class="input-txt" name="phone" value="<?php if(isset($_POST['phone'])) { echo $_POST['phone']; } ?>" type="text" required placeholder="Số điện thoại di động *" pattern="^[0-9]{10,12}$" oninvalid="setCustomValidity('Số điện thoại di động không đúng')" oninput="setCustomValidity('')">
+					<input id="email" class="input-txt" name="email" value="<?php if(isset($_POST['email'])) { echo $_POST['email']; } ?>" type="text" required placeholder="Email *"  pattern="[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" oninvalid="setCustomValidity('Email không chính xác!')" oninput="setCustomValidity('')">
+					<input id="address" class="input-txt" name="address" value="<?php if(isset($_POST['address'])) { echo $_POST['address']; } ?>" type="text" required placeholder="Khu vực sinh sống *" oninvalid="setCustomValidity('Khu vực sinh sống là bắt buộc')" oninput="setCustomValidity('')">
+					<textarea id="note" name="note" class="input-txt" rows="8" style="height: 60px;" placeholder="Ghi chú"><?php if(isset($_POST['note'])) { echo $_POST['note']; } ?></textarea>
 
-					<select name="region" class="styled" required="" oninvalid="setCustomValidity('Khu vực sinh sống là bắt buộc')" oninput="setCustomValidity('')">
-						<option value="">Khu vực sinh sống*</option>
-						<option value="1" <?php if($_POST['region']==1){echo "selected"; }?>>Hà Nội</option>
-						<option value="2" <?php if($_POST['region']==2){echo "selected"; }?>>Hồ Chí Minh</option>
-						<option value="3" <?php if($_POST['region']==3){echo "selected"; }?>>Bình Dương</option>
-					</select>
-
-					<select name="caoch" class="styled" required="" oninvalid="setCustomValidity('Mức thu nhập của bạn là bắt buộc')" oninput="setCustomValidity('')">
-						<option value="">Mức thu nhập của bạn*</option>
-						<option value="1" <?php if($_POST['caoch']==1){echo "selected"; }?>>Lương dưới 10 triệu</option>
-						<option value="2" <?php if($_POST['caoch']==2){echo "selected"; }?>>Lương từ 10 triệu - 15 triệu</option>
-						<option value="3" <?php if($_POST['caoch']==3){echo "selected"; }?>>Lương từ 16 triệu - 20 triệu</option>
-						<option value="4" <?php if($_POST['caoch']==4){echo "selected"; }?>>Lương trên 20 triệu</option>
-					</select>
-
-					<select name="cardtype" class="styled" required="" oninvalid="setCustomValidity('Loại thẻ đăng ký là bắt buộc')" oninput="setCustomValidity('')">
-						<option value="">Loại thẻ đăng ký*</option>
-						<option value="1" <?php if($_POST['cardtype']==1){echo "selected"; }?>>visa</option>
-						<option value="2" <?php if($_POST['cardtype']==2){echo "selected"; }?>>Master</option>
-					</select>
 					<div style="clear:both; margin-bottom: 10px;"></div>
 					<input type="checkbox" name="agree_term" <?php if(isset($_POST['name'])) { echo "checked"; }?> value="agree" required="" oninvalid="setCustomValidity('Bạn phải đồng ý với điều khoản này')" onchange="setCustomValidity('')">  Tôi đồng ý rằng Sacombank có thể sử dụng thông tin trên đây để liên hệ với tôi nhằm giới thiệu những sản phẩm, dịch vụ và chương trình khuyến mãi của Sacombank từ nay trở về sau.<br>
 					<input type="hidden" name="aff_source" id="aff_source" class="aff_source" value=""/>
@@ -433,7 +407,7 @@ if(isset($_POST['name'])) {
 <section id="footer">
 	<div class="container">
 		<div class="footer-txt col-lg-6 col-md-6 col-sm-12 col-xs-12 pull-left">
-			Copyright (C) 2016 Accesstrad VN & Sacomabank
+			Copyright (C) 2016 Accesstrade VN & Sacomabank
 		</div>
 		<div class="footer-logo col-lg-6 col-md-6 col-sm-12 col-xs-12 pull-right">
 			<img src="img/logo-accesstrade.png" alt="logo accesstrade"/><img src="img/logo-saccom.png" alt="logo saccombank"/><img src="img/logo-norton.png" alt="logo norton secure"/>
@@ -477,8 +451,6 @@ if(isset($_POST['name'])) {
 
 </body>
 </html>
-
-
 
 
 
