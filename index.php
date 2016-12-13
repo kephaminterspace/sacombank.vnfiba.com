@@ -381,6 +381,7 @@ if(isset($_POST['name'])) {
 </section>
 <script src="js/jquery-1.10.1.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
+<script src="js/jquery.validate.min.js"></script>
 
 <script src="//cdn.accesstrade.vn/js/tracking.js" ></script>
 <script type="text/javascript">
