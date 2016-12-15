@@ -237,8 +237,10 @@ if(isset($_POST['submit_form'])) {
 				<div class="shape-two"><div class="shape-one"><img src="img/may-bay-mat-troi.jpg" alt="máy bay mặt trời" /></div></div>
 				<div style="clear:both;"></div>
 				<p class="uu-dai-txt">
-					Hoàn tiền cho 100 giao dịch mua vé máy bay online trên website chính thức của Vietnam Airlines, Vietjet Air và Jetstar Pacific đầu tiên đến hết 28/02/2016 bằng thẻ Sacombank Visa Signature.
-					<br/> <span class="yellow-txt"> (*) Mỗi chủ thẻ được hoàn 1 lần, tối đa 1.000.000 VNĐ/vé nội địa hoặc 3.000.000 VNĐ/vé quốc tế</span></p>
+					- Gói thưởng dặm cho khách hàng mở thẻ lần đầu:
+					<br>&nbsp;&nbsp;+ Tặng ngay 500 dặm Sacombank khi phát sinh bất kỳ chi tiêu nào trong 03 tháng đầu tiên mở thẻ
+					<br>&nbsp;&nbsp;+ Tặng thêm 4.500 dặm Sacombank khi chi tiêu tối thiểu 100 triệu trong 03 tháng đầu tiên mở thẻ
+					<br/> <span class="yellow-txt"> (*)Tặng đến 3.000.00 đồng cho chuyến bay đầu tiên của 100 khách hàng mở thẻ sớm nhất</span></p>
 			</div>
 			<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 				<div class="shape-two"><div class="shape-one"><img src="img/may-bay-troi-xanh.jpg" alt="máy bay trời xanh" /></div></div>

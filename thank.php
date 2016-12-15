@@ -29,7 +29,7 @@
             <div class="">
                 <div class="panel-body" style="text-align:center">
                     <p class="tkf">Cảm ơn bạn đã đăng ký </p>
-                    <p class="tkdes">Bạn đã đăng ký thành công, chúng tôi sẽ liên hệ với bạn trong thời gian sớm nhất.</p>
+                    <p class="tkdes">Chúng tôi sẽ liên hệ lại quý khách …</p>
                     <div class="row">
                         <div class="col-sm-12 btn-end">
                             <a href="http://sacombank.vnfiba.com/" class="btn-lg-x">Trở về trang chủ</a>
