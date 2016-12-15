@@ -1,6 +1,15 @@
 
 <?php
 
+function validatePhone($phone_text){
+	$phone = preg_replace('/[^0-9]/', '', $phone_text);
+	if(strlen($phone) === 10 || strlen($phone) === 11) {
+		return true;
+	}else{
+		return false;
+	}
+}
+
 $message="";
 function validateEmail($email){
 	return filter_var($email, FILTER_VALIDATE_EMAIL);
@@ -9,11 +18,13 @@ function validateEmail($email){
 
 if(isset($_POST['submit_form'])) {
 	$messages = [];
+	$check_messages = [];
+
 	if (!($_POST['name'])) {
 		$check_messages['name'] = 'style="border: 2px solid red;"';
 	}
 
-	if (!($_POST['phone'])) {
+	if (!validatePhone($_POST['phone'])) {
 		$check_messages['phone'] = 'style="border: 2px solid red;"';
 	}
 
@@ -27,7 +38,7 @@ if(isset($_POST['submit_form'])) {
 	}
 
 	if (!isset($_POST['agree_term'])) {
-		$message = 'Bạn phải đồng ý với điều khoản của chúng tôi';
+		$message = 'Đồng ý... là bắt buộc';
 	}
 
 	if (count($check_messages) == 0 && $message=="") {
@@ -226,14 +237,14 @@ if(isset($_POST['submit_form'])) {
 				<div class="shape-two"><div class="shape-one"><img src="img/may-bay-mat-troi.jpg" alt="máy bay mặt trời" /></div></div>
 				<div style="clear:both;"></div>
 				<p class="uu-dai-txt">
-					Hoàn tiền cho 100 giao dịch mua vé máy bay online trên website chính thức của Vietnam Airlines, Vietjet Air và Jetstar Pacific đầu tiên đến hết 28/02/2016 bằng thẻ Sacombank Visa Signature. (*)
+					Hoàn tiền cho 100 giao dịch mua vé máy bay online trên website chính thức của Vietnam Airlines, Vietjet Air và Jetstar Pacific đầu tiên đến hết 28/02/2016 bằng thẻ Sacombank Visa Signature.
 					<br/> <span class="yellow-txt"> (*) Mỗi chủ thẻ được hoàn 1 lần, tối đa 1.000.000 VNĐ/vé nội địa hoặc 3.000.000 VNĐ/vé quốc tế</span></p>
 			</div>
 			<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 				<div class="shape-two"><div class="shape-one"><img src="img/may-bay-troi-xanh.jpg" alt="máy bay trời xanh" /></div></div>
 				<div style="clear:both;"></div>
 				<p class="uu-dai-txt">
-					Hoàn tiền cho 100 giao dịch mua vé máy bay online trên website chính thức của Vietnam Airlines, Vietjet Air và Jetstar Pacific đầu tiên đến hết 28/02/2016 bằng thẻ Sacombank Visa Signature. (*)
+					Hoàn tiền cho 100 giao dịch mua vé máy bay online trên website chính thức của Vietnam Airlines, Vietjet Air và Jetstar Pacific đầu tiên đến hết 28/02/2016 bằng thẻ Sacombank Visa Signature.
 					<br/> <span class="yellow-txt"> (*) Mỗi chủ thẻ được hoàn 1 lần, tối đa 1.000.000 VNĐ/vé nội địa hoặc 3.000.000 VNĐ/vé quốc tế</span></p>
 			</div>
 			<div style="clear:both;"></div>

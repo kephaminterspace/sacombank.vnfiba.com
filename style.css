@@ -8,7 +8,7 @@ div, p, span, ul, li, a, h1, h2, section{
 #header {
 	background: url('img/header-bg.jpg') no-repeat center ;
 	background-color: #011D3E;
-	height: 710px;
+	height: 740px;
 	border-top: 10px solid #0072bc;
 	overflow:visible;
 	background-size:contain;
