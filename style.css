@@ -205,7 +205,7 @@ p.uu-dai-txt {
 }
 #faq .panel-body {
 	background: #e6e6e6;
-	color: #999999;
+	/*color: #999999;*/
 }
 #faq .faq-page-navi {
 	text-align:center;
@@ -220,7 +220,7 @@ p.uu-dai-txt {
 	margin-left: 5px;
 }
 .dark-txt {
-	color:#ccc;
+	/*color:#ccc;*/
 }
 /*.radio-custom input[type="radio"] {*/
     /*opacity: 0.66;*/

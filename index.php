@@ -1,6 +1,28 @@
 
 <?php
 
+function gen_uuid() {
+	return sprintf( '%04x%04x-%04x-%04x-%04x-%04x%04x%04x',
+		// 32 bits for "time_low"
+		mt_rand( 0, 0xffff ), mt_rand( 0, 0xffff ),
+
+		// 16 bits for "time_mid"
+		mt_rand( 0, 0xffff ),
+
+		// 16 bits for "time_hi_and_version",
+		// four most significant bits holds version number 4
+		mt_rand( 0, 0x0fff ) | 0x4000,
+
+		// 16 bits, 8 bits for "clk_seq_hi_res",
+		// 8 bits for "clk_seq_low",
+		// two most significant bits holds zero and one for variant DCE1.1
+		mt_rand( 0, 0x3fff ) | 0x8000,
+
+		// 48 bits for "node"
+		mt_rand( 0, 0xffff ), mt_rand( 0, 0xffff ), mt_rand( 0, 0xffff )
+	);
+}
+
 function validatePhone($phone_text){
 	$phone = preg_replace('/[^0-9]/', '', $phone_text);
 	if(strlen($phone) === 10 || strlen($phone) === 11) {
@@ -83,7 +105,7 @@ if(isset($_POST['submit_form'])) {
 				),
 				array(
 					'property' => 'identifier',
-					'value' => (string)$t . '_' . $_POST['email']
+					'value' => gen_uuid()
 				),
 				array(
 					'property' => 'hs_lead_status',
@@ -214,11 +236,11 @@ if(isset($_POST['submit_form'])) {
 		</div>
 		<div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 pull-right">
 			<ul class="list-ich">
-				<li> Tích lũy 01 dặm Sacombank với mỗi 20.000 đồng chi tiêu bằng thẻ Sacombank Visa Signature.</li>
+				<li> Tích lũy 01 dặm Sacombank với mỗi <span style="font-weight: bold; font-size: 20px;">20.000 đồng</span> chi tiêu bằng thẻ Sacombank Visa Signature.</li>
 				<li>  Linh hoạt quy đổi dặm Sacombank sang vé máy bay nhiều hãng hàng không
 					(gồm Vietnam Airlines, Vietjet Air, Jetstar Pacific), dặm xét hạng Vietnam Airlines,
 					phí thường niên hoặc tiền mặt.</li>
-				<li>Miễn phí thẻ Priority Pass sử dụng hơn 1.000 phòng chờ tại các sân bay toàn cầu.</li>
+				<li>Miễn phí thẻ Priority Pass để sử dụng hơn 1.000 phòng chờ tại các sân bay toàn cầu.</li>
 				<li> Bảo hiểm du lịch lên đến 10,5 tỷ VNĐ</li>
 				<li>Tận hưởng đầy đủ các tiện ích của thẻ tín dụng quốc tế Sacombank như:
 					mua trước trả sau miễn lãi 55 ngày, thanh toán và rút tiền mặt
@@ -254,7 +276,7 @@ if(isset($_POST['submit_form'])) {
 	</div>
 </section>
 <div style="clear:both;"></div>
-<section id="dieu-kien">
+<section id="dieu-kien" style="padding-bottom: 20px;">
 	<div class="container">
 		<h2>điều kiện áp dụng</h2>
 		<ul>
