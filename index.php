@@ -157,7 +157,7 @@ if(isset($_POST['submit_form'])) {
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, maximum-scale=1.0">
-	<title>Saccombank</title>
+	<title>Sacombank</title>
 	<meta content="" name="keywords">
 	<meta content="" name="description">
 	<link href="https://fonts.googleapis.com/css?family=Roboto+Slab&amp;subset=vietnamese" rel="stylesheet">
