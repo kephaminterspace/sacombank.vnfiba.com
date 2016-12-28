@@ -59,6 +59,12 @@ if(isset($_POST['submit_form'])) {
 		$check_messages['address'] = 'style="border: 2px solid red;"';
 	}
 
+	if (!($_POST['salary'])) {
+		$check_messages['salary'] = 'style="border: 2px solid red;"';
+	}else if($_POST['salary']<60000000){
+		$check_messages['salary'] = 'style="border: 2px solid red;"';
+	}
+
 	if (!isset($_POST['agree_term'])) {
 		$message = 'Đồng ý... là bắt buộc';
 	}
@@ -86,6 +92,10 @@ if(isset($_POST['submit_form'])) {
 				array(
 					'property' => 'phone',
 					'value' => $_POST['phone']
+				),
+				array(
+					'property' => 'salary',
+					'value' => $_POST['salary']
 				),
 				array(
 					'property' => 'address',
@@ -214,6 +224,9 @@ if(isset($_POST['submit_form'])) {
 					<input id="phone" class="input-txt" name="phone" value="<?php if(isset($_POST['phone'])) { echo $_POST['phone']; } ?>" type="text" required placeholder="Số điện thoại di động *" pattern="^[0-9]{10,12}$" oninvalid="setCustomValidity('Số điện thoại di động không đúng')" oninput="setCustomValidity('')" <?php if(isset($check_messages['phone'])) { echo $check_messages['phone']; } ?>>
 					<input id="email" class="input-txt" name="email" value="<?php if(isset($_POST['email'])) { echo $_POST['email']; } ?>" type="text" required placeholder="Email *"  pattern="[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" oninvalid="setCustomValidity('Email không chính xác!')" oninput="setCustomValidity('')" <?php if(isset($check_messages['email'])) { echo $check_messages['email']; } ?>>
 					<input id="address" class="input-txt" name="address" value="<?php if(isset($_POST['address'])) { echo $_POST['address']; } ?>" type="text" required placeholder="Khu vực sinh sống *" oninvalid="setCustomValidity('Khu vực sinh sống là bắt buộc')" oninput="setCustomValidity('')" <?php if(isset($check_messages['address'])) { echo $check_messages['address']; } ?>>
+
+					<input id="salary" class="input-txt" name="salary" value="<?php if(isset($_POST['salary'])) { echo $_POST['salary']; } ?>"  type="number" min="60000000" required placeholder="Mức thu nhập(trên 60 triệu) *" oninvalid="setCustomValidity('Mức thu nhập phải trên 60 triệu')" oninput="setCustomValidity('')" <?php if(isset($check_messages['salary'])) { echo $check_messages['salary']; } ?>>
+
 					<textarea id="note" name="note" class="input-txt" rows="8" style="height: 60px;" placeholder="Ghi chú"><?php if(isset($_POST['note'])) { echo $_POST['note']; } ?></textarea>
 
 					<div style="clear:both; margin-bottom: 10px;"></div>
