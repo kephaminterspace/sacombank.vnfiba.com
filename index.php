@@ -275,7 +275,7 @@ if(isset($_POST['submit_form'])) {
 					- Gói thưởng dặm cho khách hàng mở thẻ lần đầu:
 					<br>&nbsp;&nbsp;+ Tặng ngay 500 dặm Sacombank khi phát sinh bất kỳ chi tiêu nào trong 03 tháng đầu tiên mở thẻ
 					<br>&nbsp;&nbsp;+ Tặng thêm 4.500 dặm Sacombank khi chi tiêu tối thiểu 100 triệu trong 03 tháng đầu tiên mở thẻ
-					<br/> <span class="yellow-txt"> (*)Tặng đến 3.000.00 đồng cho chuyến bay đầu tiên của 100 khách hàng mở thẻ sớm nhất</span></p>
+					<br/> <span class="yellow-txt"> (*)Tặng đến 3.000.000 đồng cho chuyến bay đầu tiên của 100 khách hàng mở thẻ sớm nhất</span></p>
 			</div>
 			<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 				<div class="shape-two"><div class="shape-one"><img src="img/may-bay-troi-xanh.jpg" alt="máy bay trời xanh" /></div></div>
