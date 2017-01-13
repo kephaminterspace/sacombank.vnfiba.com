@@ -50,6 +50,10 @@ if(isset($_POST['submit_form'])) {
 		$check_messages['phone'] = 'style="border: 2px solid red;"';
 	}
 
+	if (!$_POST['cmnd']) {
+		$check_messages['cmnd'] = 'style="border: 2px solid red;"';
+	}
+
 	$email = $_POST['email'];
 	if (!validateEmail($email)) {
 		$check_messages['email'] = 'style="border: 2px solid red;"';
@@ -84,6 +88,10 @@ if(isset($_POST['submit_form'])) {
 				array(
 					'property' => 'firstname',
 					'value' => $_POST['name']
+				),
+				array(
+					'property' => 'cmnd',
+					'value' => $_POST['cmnd']
 				),
 				array(
 					'property' => 'lastname',
@@ -206,8 +214,6 @@ if(isset($_POST['submit_form'])) {
 
 					<p>Thẻ Sacombank nằm trong tầm tay bạn. Hãy điền thông tin của bạn và chúng tôi sẽ gọi ngay cho bạn trong 24 giờ để hỗ trợ bạn đăng ký.</p>
 					<p>Bạn có Thẻ tín dụng Sacombank chưa?</p>
-
-
 					<div class="radio-custom radio-danger fl mr-10">
 						<input type="radio" id="yes" <?php if(isset($_POST['luong'])) { if($_POST['luong']=="yes"){ echo "checked"; }}?> name="luong" value="yes" required oninvalid="setCustomValidity('Xin vui lòng chọn một ô')" onclick="clearValidity()"/>
 						<label for="yes">Có</label>
@@ -216,11 +222,9 @@ if(isset($_POST['submit_form'])) {
 						<input type="radio" id="no" <?php if(isset($_POST['luong'])) { if($_POST['luong']=="no"){ echo "checked"; }}else{echo "checked"; }?> name="luong" value="no" required onclick="clearValidity()"/>
 						<label for="no">Chưa có</label>
 					</div>
-
-
 					<div style="clear:both;"></div>
-					<p>Thông tin cá nhân:</p>
 					<input id="name" class="input-txt" name="name" value="<?php if(isset($_POST['name'])) { echo $_POST['name']; } ?>" type="text" required placeholder="Họ tên *" oninvalid="setCustomValidity('Họ tên không để trống')" oninput="setCustomValidity('')" <?php if(isset($check_messages['name'])) { echo $check_messages['name']; } ?>>
+					<input id="cmnd" class="input-txt" name="cmnd" value="<?php if(isset($_POST['cmnd'])) { echo $_POST['cmnd']; } ?>" type="text" required placeholder="Chứng minh nhân dân *" oninvalid="setCustomValidity('Chứng minh nhân dân là bắt buộc')" oninput="setCustomValidity('')" <?php if(isset($check_messages['cmnd'])) { echo $check_messages['cmnd']; } ?>>
 					<input id="phone" class="input-txt" name="phone" value="<?php if(isset($_POST['phone'])) { echo $_POST['phone']; } ?>" type="text" required placeholder="Số điện thoại di động *" pattern="^[0-9]{10,12}$" oninvalid="setCustomValidity('Số điện thoại di động không đúng')" oninput="setCustomValidity('')" <?php if(isset($check_messages['phone'])) { echo $check_messages['phone']; } ?>>
 					<input id="email" class="input-txt" name="email" value="<?php if(isset($_POST['email'])) { echo $_POST['email']; } ?>" type="text" required placeholder="Email *"  pattern="[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" oninvalid="setCustomValidity('Email không chính xác!')" oninput="setCustomValidity('')" <?php if(isset($check_messages['email'])) { echo $check_messages['email']; } ?>>
 					<input id="address" class="input-txt" name="address" value="<?php if(isset($_POST['address'])) { echo $_POST['address']; } ?>" type="text" required placeholder="Khu vực sinh sống *" oninvalid="setCustomValidity('Khu vực sinh sống là bắt buộc')" oninput="setCustomValidity('')" <?php if(isset($check_messages['address'])) { echo $check_messages['address']; } ?>>
